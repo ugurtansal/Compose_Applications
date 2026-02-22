@@ -1,0 +1,9 @@
+package com.ugurtansal.jetpack_applicaitons.mealsApp
+
+data class Meal(
+    val id: Int,
+    val mealName: String,
+    val mealVisual: String,
+    val mealPrice: Int
+) {
+}
