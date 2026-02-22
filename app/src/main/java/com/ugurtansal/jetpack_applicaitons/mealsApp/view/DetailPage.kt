@@ -1,4 +1,4 @@
-package com.ugurtansal.jetpack_applicaitons.mealsApp
+package com.ugurtansal.jetpack_applicaitons.mealsApp.view
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -19,15 +19,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.ugurtansal.jetpack_applicaitons.ui.theme.JetPack_ApplicaitonsTheme
+import com.ugurtansal.jetpack_applicaitons.mealsApp.entity.Meal
 import com.ugurtansal.jetpack_applicaitons.ui.theme.MealsAppTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)

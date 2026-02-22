@@ -1,4 +1,4 @@
-package com.ugurtansal.jetpack_applicaitons.mealsApp
+package com.ugurtansal.jetpack_applicaitons.mealsApp.entity
 
 data class Meal(
     val id: Int,
