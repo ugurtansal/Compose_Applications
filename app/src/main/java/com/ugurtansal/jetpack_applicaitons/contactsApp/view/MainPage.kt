@@ -1,6 +1,7 @@
 package com.ugurtansal.jetpack_applicaitons.contactsApp.view
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -45,7 +46,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.gson.Gson
 import com.ugurtansal.jetpack_applicaitons.R
+import com.ugurtansal.jetpack_applicaitons.contactsApp.database.MyDatabase
 import com.ugurtansal.jetpack_applicaitons.contactsApp.entity.Contact
+import com.ugurtansal.jetpack_applicaitons.contactsApp.viewModelFactory.MainPageViewModelFactory
 import com.ugurtansal.jetpack_applicaitons.contactsApp.viewmodel.MainPageViewModel
 import com.ugurtansal.jetpack_applicaitons.ui.theme.ContactsTopBar
 import com.ugurtansal.jetpack_applicaitons.ui.theme.JetPack_ApplicaitonsTheme
@@ -93,10 +96,18 @@ fun PageTransitions() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainPage(navController: NavController) {
-    val mViewModel: MainPageViewModel = viewModel()
-
-    val contactsLis = mViewModel.contactList.observeAsState(listOf()).value
     val context = LocalContext.current // Context'i aldık
+
+    val mViewModel: MainPageViewModel = viewModel(
+        factory = MainPageViewModelFactory(context.applicationContext as Application)
+    )
+
+    val contactsLis = mViewModel.contactList.observeAsState(listOf())
+
+    LaunchedEffect(Unit) {
+        mViewModel.getAllContacts()
+    }
+
 
 
     val isSearching = remember { mutableStateOf(false) }
@@ -161,10 +172,10 @@ fun MainPage(navController: NavController) {
                 .fillMaxSize()
         ) {
             items(
-                count = contactsLis.size,
-                key = { contactsLis[it].contactId }
+                count = contactsLis.value.size,
+                key = { contactsLis.value[it].contactId }
             ) { index ->
-                val contact = contactsLis[index]
+                val contact = contactsLis.value[index]
                 Card(
                     Modifier
                         .fillMaxWidth()

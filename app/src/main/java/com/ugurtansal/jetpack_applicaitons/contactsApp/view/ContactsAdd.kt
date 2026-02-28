@@ -1,6 +1,7 @@
 package com.ugurtansal.jetpack_applicaitons.contactsApp.view
 
 import android.annotation.SuppressLint
+import android.app.Application
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,10 +21,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ugurtansal.jetpack_applicaitons.contactsApp.viewModelFactory.AddPageViewModelFactory
+import com.ugurtansal.jetpack_applicaitons.contactsApp.viewModelFactory.MainPageViewModelFactory
 import com.ugurtansal.jetpack_applicaitons.contactsApp.viewmodel.AddPageViewModel
 import com.ugurtansal.jetpack_applicaitons.ui.theme.ContactsTopBar
 
@@ -31,7 +35,12 @@ import com.ugurtansal.jetpack_applicaitons.ui.theme.ContactsTopBar
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ContactsAddPage(){
-    val aViewModel: AddPageViewModel = viewModel()
+    val context= LocalContext.current
+
+    val aViewModel: AddPageViewModel =viewModel(
+        factory = AddPageViewModelFactory(context.applicationContext as Application),
+
+    )
 
     val tfName = remember { mutableStateOf("") }
     val tfNumber = remember { mutableStateOf("") }

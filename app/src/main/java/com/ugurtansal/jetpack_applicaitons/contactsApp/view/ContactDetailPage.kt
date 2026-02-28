@@ -1,6 +1,7 @@
 package com.ugurtansal.jetpack_applicaitons.contactsApp.view
 
 import android.annotation.SuppressLint
+import android.app.Application
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,9 +21,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ugurtansal.jetpack_applicaitons.contactsApp.entity.Contact
+import com.ugurtansal.jetpack_applicaitons.contactsApp.viewModelFactory.DetailPageViewModelFactory
+import com.ugurtansal.jetpack_applicaitons.contactsApp.viewModelFactory.MainPageViewModelFactory
 import com.ugurtansal.jetpack_applicaitons.contactsApp.viewmodel.DetailPageViewModel
 import com.ugurtansal.jetpack_applicaitons.ui.theme.ContactsTopBar
 
@@ -32,7 +36,11 @@ import com.ugurtansal.jetpack_applicaitons.ui.theme.ContactsTopBar
 @Composable
 fun ContactDetailPage(contact: Contact) {
 
-    val dViewModel: DetailPageViewModel= viewModel()
+    val context= LocalContext.current
+
+    val dViewModel: DetailPageViewModel= viewModel(
+        factory = DetailPageViewModelFactory(context.applicationContext as Application)
+    )
 
     val tfName = remember { mutableStateOf(contact.contactName) }
     val tfNumber = remember { mutableStateOf(contact.contactNumber.toString()) }
