@@ -11,7 +11,7 @@ class MealDaoRepo {
         mealList= MutableLiveData()
     }
 
-    fun getMealList(): MutableLiveData<List<Meal>>{
+    fun getMealsList(): MutableLiveData<List<Meal>>{
         return mealList
     }
 
