@@ -10,7 +10,7 @@ class MainPageViewModel {
 
     init{
         getMeals()
-        mealsList=mRepo.getMealList()
+        mealsList=mRepo.getMealsList()
     }
 
     fun getMeals(){
